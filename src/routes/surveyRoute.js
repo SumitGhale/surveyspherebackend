@@ -9,7 +9,7 @@ import {
 const router = express.Router();
 
 // get all surveys:
-router.get("/", getAllSurveys);
+router.get("/:userId", getAllSurveys);
 
 // create a new survey:
 router.post("/", createSurvey);

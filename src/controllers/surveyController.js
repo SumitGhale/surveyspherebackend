@@ -1,7 +1,11 @@
 import supabase from "../config/db.js";
 
 export const getAllSurveys = async (req, res) => {
-  const { data, error } = await supabase.from("surveys").select("*");
+  const { userId } = req.params;
+  const { data, error } = await supabase
+    .from("surveys")
+    .select("*")
+    .eq("host_id", userId);
   if (error) {
     return res.status(500).json({ error: error.message });
   }

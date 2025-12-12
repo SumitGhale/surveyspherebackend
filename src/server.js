@@ -59,6 +59,18 @@ io.on("connection", (socket) => {
     }
   });
 
+  // Host ends the survey
+  socket.on("endSurvey", (data) => {
+    const { roomCode } = data;
+    const session = sessions[roomCode];
+    if (session) {
+      io.in(roomCode).emit("surveyEnded");
+      io.socketsLeave(roomCode);
+      delete sessions[roomCode];
+      console.log(`Survey ended for room: ${roomCode}`);
+    }
+  });
+
   // 🧹 Handle disconnect
   socket.on("disconnect", () => {
     console.log(`User disconnected: ${socket.id}`);

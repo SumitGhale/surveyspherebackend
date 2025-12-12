@@ -9,6 +9,20 @@ export const getUsers = async (req, res) => {
   res.status(200).json(data);
 };
 
+export const createUser = async (req, res) => {
+  const {id, name, email } = req.body;
+
+  const { data, error } = await supabase
+    .from("users")
+    .insert([{ id: id, name: name, email: email }])
+    .select();
+
+  if (error) {
+    return res.status(500).json({ error: error.message });
+  }
+  res.status(201).json({ message: "User created successfully", user: data });
+}
+
 export const updateUser = async (req, res) => {
   const id = req.params.id;
 

@@ -26,6 +26,7 @@ export const createQuestion = async (req, res) => {
   const maxOrderIndexResult = await supabase
     .from("questions")
     .select("order_index")
+    .eq("survey_id", survey_id)
     .order("order_index", { ascending: false })
     .limit(1);
 

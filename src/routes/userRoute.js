@@ -4,12 +4,16 @@ import {
   updateUser,
   getUserById,
   deleteUser,
+  createUser,
 } from "../controllers/userControllers.js";
 
 const router = express.Router();
 
 // get users
 router.get("/", getUsers);
+
+// create user
+router.post("/", createUser);
 
 // update user
 router.put("/:id", updateUser);
